@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/jarinosuke/JRNPasteboardMonitor"
   s.author       = { "Naoki Ishikawa" => "naokiishikawa0808@gmail.com" }
   s.source       = { :git => "https://github.com/jarinosuke/JRNPasteboardMonitor.git", :tag => "0.0.1" }
-  s.source_files = 'JRNPasteboardMonitor*.{h,m}'
+  s.source_files = 'JRNPasteboardMonitor/*.{h,m}'
   s.requires_arc = true
   s.license      = {
 	:type => 'MIT',
