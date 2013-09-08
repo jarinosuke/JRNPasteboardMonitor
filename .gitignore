@@ -1,0 +1,7 @@
+/DemoApp.xcodeproj/project.xcworkspace/
+/DemoApp.xcodeproj/xcuserdata/
+/DemoApp.xcodeproj/*.DS_Store
+
+/.DS_Store
+/build/
+/DemoApp/DemoApp.xcodeproj/project.xcworkspace/xcuserdata/jarinosuke.xcuserdatad/UserInterfaceState.xcuserstate
