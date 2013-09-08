@@ -21,6 +21,7 @@
 		2B7E62FA17DC2680007BB6E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7E62DC17DC2680007BB6E1 /* UIKit.framework */; };
 		2B7E630217DC2680007BB6E1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2B7E630017DC2680007BB6E1 /* InfoPlist.strings */; };
 		2B7E630417DC2680007BB6E1 /* DemoAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7E630317DC2680007BB6E1 /* DemoAppTests.m */; };
+		2B7E631017DC27FE007BB6E1 /* JRNPasteboardMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7E630F17DC27FE007BB6E1 /* JRNPasteboardMonitor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		2B7E62FF17DC2680007BB6E1 /* DemoAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoAppTests-Info.plist"; sourceTree = "<group>"; };
 		2B7E630117DC2680007BB6E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2B7E630317DC2680007BB6E1 /* DemoAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoAppTests.m; sourceTree = "<group>"; };
+		2B7E630E17DC27FE007BB6E1 /* JRNPasteboardMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRNPasteboardMonitor.h; path = ../JRNPasteboardMonitor/JRNPasteboardMonitor.h; sourceTree = "<group>"; };
+		2B7E630F17DC27FE007BB6E1 /* JRNPasteboardMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRNPasteboardMonitor.m; path = ../JRNPasteboardMonitor/JRNPasteboardMonitor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +85,7 @@
 		2B7E62CC17DC2680007BB6E1 = {
 			isa = PBXGroup;
 			children = (
+				2B7E630D17DC27C3007BB6E1 /* JRNPasteboardMonitor */,
 				2B7E62DE17DC2680007BB6E1 /* DemoApp */,
 				2B7E62FD17DC2680007BB6E1 /* DemoAppTests */,
 				2B7E62D717DC2680007BB6E1 /* Frameworks */,
@@ -150,6 +154,15 @@
 				2B7E630017DC2680007BB6E1 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2B7E630D17DC27C3007BB6E1 /* JRNPasteboardMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				2B7E630E17DC27FE007BB6E1 /* JRNPasteboardMonitor.h */,
+				2B7E630F17DC27FE007BB6E1 /* JRNPasteboardMonitor.m */,
+			);
+			name = JRNPasteboardMonitor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B7E631017DC27FE007BB6E1 /* JRNPasteboardMonitor.m in Sources */,
 				2B7E62EF17DC2680007BB6E1 /* ViewController.m in Sources */,
 				2B7E62E917DC2680007BB6E1 /* AppDelegate.m in Sources */,
 				2B7E62E517DC2680007BB6E1 /* main.m in Sources */,
