@@ -37,6 +37,7 @@ If you don't need monitoring, please write it below. just 1 line similary.
 ```objectivec
 [[JRNPasteboardMonitor defaultMonitor] stopMonitoring];
 ```
+
 ## Install
 Using [CocoaPods](http://cocoapods.org) is the best way.
 
