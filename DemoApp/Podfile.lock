@@ -1,0 +1,10 @@
+PODS:
+  - JRNLocalNotificationCenter (0.0.1)
+
+DEPENDENCIES:
+  - JRNLocalNotificationCenter
+
+SPEC CHECKSUMS:
+  JRNLocalNotificationCenter: f248a615dbfca9ab103db6d788837e0284ceec3d
+
+COCOAPODS: 0.22.3

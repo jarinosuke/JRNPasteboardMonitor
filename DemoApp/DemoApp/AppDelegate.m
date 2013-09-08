@@ -8,16 +8,41 @@
 
 #import "AppDelegate.h"
 #import "JRNPasteboardMonitor.h"
+#import "JRNLocalNotificationCenter.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    //this is another library, please read this. https://github.com/jarinosuke/JRNLocalNotificationCenter
+    //set notification handler
+    [[JRNLocalNotificationCenter defaultCenter] setLocalNotificationHandler:^(NSString *key, NSDictionary *userInfo) {
+        [[[UIAlertView alloc] initWithTitle:@"You copied!"
+                                    message:userInfo[@"copied_string"]
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    }];
+    
+    
+    //set pasteboard handler
     [[JRNPasteboardMonitor defaultMonitor] startMonitoringWithChangeHandler:^(NSString *string) {
-        NSLog(@"changed %@", string);
+        [[JRNLocalNotificationCenter defaultCenter] postNotificationOnNowForKey:@"JRNPasteboardMonitor_Copy"
+                                                                      alertBody:[NSString stringWithFormat:@"%@ copied.", string]
+                                                                    alertAction:@"Open"
+                                                                      soundName:nil
+                                                                    launchImage:nil
+                                                                       userInfo:@{@"copied_string": string}
+                                                                     badgeCount:0];
     }];
     return YES;
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    //this is another library, please read this. https://github.com/jarinosuke/JRNLocalNotificationCenter
+    //notification handling method.
+    [[JRNLocalNotificationCenter defaultCenter] didReceiveLocalNotificationUserInfo:notification.userInfo];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
