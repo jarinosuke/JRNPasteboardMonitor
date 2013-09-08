@@ -7,12 +7,16 @@
 //
 
 #import "AppDelegate.h"
+#import "JRNPasteboardMonitor.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[JRNPasteboardMonitor defaultMonitor] startMonitoringWithChangeHandler:^(NSString *string) {
+        NSLog(@"changed %@", string);
+    }];
     return YES;
 }
 							
