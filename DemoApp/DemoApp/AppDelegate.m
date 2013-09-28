@@ -25,6 +25,19 @@
     }];
     
     
+    
+    //set expiration handler
+    [JRNPasteboardMonitor defaultMonitor].expireHandler = ^{
+        [[JRNLocalNotificationCenter defaultCenter] postNotificationOnNowForKey:@"JRNPasteboardMonitor_Expire"
+                                                                      alertBody:@"Monitoring was expired, please launch again."
+                                                                    alertAction:@"Open"
+                                                                      soundName:nil
+                                                                    launchImage:nil
+                                                                       userInfo:nil
+                                                                     badgeCount:0];
+    };
+    
+    
     //set pasteboard handler
     [[JRNPasteboardMonitor defaultMonitor] startMonitoringWithChangeHandler:^(NSString *string) {
         [[JRNLocalNotificationCenter defaultCenter] postNotificationOnNowForKey:@"JRNPasteboardMonitor_Copy"

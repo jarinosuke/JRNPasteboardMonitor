@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^JRNPasteboardChangeHandler)(NSString *string);
+typedef void (^JRNPastebooardMonitoringExpireHandler)(void);
 extern NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration;
 
 @interface JRNPasteboardMonitor : NSObject
-@property (nonatomic, assign) JRNPasteboardChangeHandler changeHandler;
+@property (nonatomic, copy) JRNPasteboardChangeHandler changeHandler;
+@property (nonatomic, copy) JRNPastebooardMonitoringExpireHandler expireHandler;
+
 + (JRNPasteboardMonitor *)defaultMonitor;
 - (void)startMonitoring;
 - (void)startMonitoringWithChangeHandler:(JRNPasteboardChangeHandler)changeHandler;

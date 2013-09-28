@@ -13,7 +13,7 @@ static JRNPasteboardMonitor *defaultMonitor;
 NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 minutes
 
 @interface JRNPasteboardMonitor()
-@property (nonatomic, assign) UIBackgroundTaskIdentifier backgroundTask;
+@property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
 @end
 
 @implementation JRNPasteboardMonitor
@@ -102,6 +102,11 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
             
             //wait 1 second
             [NSThread sleepForTimeInterval:1];
+        }
+        
+        //notify expiration
+        if ( self.expireHandler ) {
+            self.expireHandler();
         }
         
         [self stopBackgroundTask];
