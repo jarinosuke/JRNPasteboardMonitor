@@ -105,10 +105,10 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
     __weak NSBlockOperation *weakOperation = operation;
     [operation addExecutionBlock:^{
         NSString *pastboardContents = [[UIPasteboard generalPasteboard] string];
+
         //detect change of pasteboard in loop
         for (NSInteger i = 0; i < JRNPasteboardMonitorBackgroundTaskExpireDuration; i++) {
             if (weakOperation.isCancelled) {
-                [self stopBackgroundTask];
                 return;
             }
             if ( ![pastboardContents isEqualToString:[[UIPasteboard generalPasteboard] string]] ) {
