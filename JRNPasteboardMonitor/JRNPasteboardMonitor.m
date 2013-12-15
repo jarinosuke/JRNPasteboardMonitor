@@ -23,7 +23,7 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        defaultMonitor = [[JRNPasteboardMonitor alloc] init];
+        defaultMonitor = [JRNPasteboardMonitor new];
         defaultMonitor.backgroundTask = UIBackgroundTaskInvalid;
     });
     return defaultMonitor;
@@ -33,7 +33,7 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
 {
     self = [super init];
     if (self) {
-        self.backgroundOperationQueue = [[NSOperationQueue alloc] init];
+        self.backgroundOperationQueue = [NSOperationQueue new];
     }
     return self;
 }
@@ -82,7 +82,7 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
 {
     //create background task identifier
     
-    if ( [[UIApplication sharedApplication] respondsToSelector:@selector(beginBackgroundTaskWithName:expirationHandler:)] ) {
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(beginBackgroundTaskWithName:expirationHandler:)]) {
         self.backgroundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithName:NSStringFromClass([self class]) expirationHandler:^{
             [self stopBackgroundTask];
         }];
@@ -93,7 +93,7 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
     }
     
     
-    if ( self.backgroundTask == UIBackgroundTaskInvalid ) {
+    if (self.backgroundTask == UIBackgroundTaskInvalid) {
         return;
     }
 
@@ -111,10 +111,10 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
             if (weakOperation.isCancelled) {
                 return;
             }
-            if ( ![pastboardContents isEqualToString:[[UIPasteboard generalPasteboard] string]] ) {
+            if (![pastboardContents isEqualToString:[[UIPasteboard generalPasteboard] string]]) {
                 pastboardContents = [[UIPasteboard generalPasteboard] string];
 
-                if ( self.changeHandler ) {
+                if (self.changeHandler) {
                     self.changeHandler([[UIPasteboard generalPasteboard] string]);
                 }
             }
@@ -124,7 +124,7 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
         }
 
         //notify expiration
-        if ( self.expireHandler ) {
+        if (self.expireHandler) {
             self.expireHandler();
         }
 
@@ -145,7 +145,7 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
 
 - (void)didChangePasteboard:(NSNotification *)notification
 {
-    if ( self.changeHandler ) {
+    if (self.changeHandler) {
         self.changeHandler([[UIPasteboard generalPasteboard] string]);
     }
 }

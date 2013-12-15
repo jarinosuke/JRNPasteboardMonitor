@@ -16,7 +16,7 @@ extern NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration;
 @property (nonatomic, copy) JRNPasteboardChangeHandler changeHandler;
 @property (nonatomic, copy) JRNPastebooardMonitoringExpireHandler expireHandler;
 
-+ (JRNPasteboardMonitor *)defaultMonitor;
++ (instancetype)defaultMonitor;
 - (void)startMonitoring;
 - (void)startMonitoringWithChangeHandler:(JRNPasteboardChangeHandler)changeHandler;
 - (void)stopMonitoring;
