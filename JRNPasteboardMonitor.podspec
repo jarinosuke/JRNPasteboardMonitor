@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name         = "JRNPasteboardMonitor"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.platform     = :ios, '6.0'
   s.summary      = "monitoring UIPasteboard changes even if your app state is in background."
   s.homepage     = "https://github.com/jarinosuke/JRNPasteboardMonitor"
   s.author       = { "Naoki Ishikawa" => "naokiishikawa0808@gmail.com" }
-  s.source       = { :git => "https://github.com/jarinosuke/JRNPasteboardMonitor.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/jarinosuke/JRNPasteboardMonitor.git", :tag => "0.0.2" }
   s.source_files = 'JRNPasteboardMonitor/*.{h,m}'
   s.requires_arc = true
   s.license      = {
