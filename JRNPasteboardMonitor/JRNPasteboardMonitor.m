@@ -14,6 +14,7 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
 
 @interface JRNPasteboardMonitor()
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
+@property (nonatomic) NSOperationQueue *backgroundOperationQueue;
 @end
 
 @implementation JRNPasteboardMonitor
@@ -27,6 +28,16 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
     });
     return defaultMonitor;
 }
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.backgroundOperationQueue = [[NSOperationQueue alloc] init];
+    }
+    return self;
+}
+
 
 - (void)startMonitoring
 {
@@ -56,6 +67,7 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
 - (void)stopMonitoring
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.backgroundOperationQueue cancelAllOperations];
 }
 
 - (void)dealloc
@@ -84,33 +96,41 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
     if ( self.backgroundTask == UIBackgroundTaskInvalid ) {
         return;
     }
-    
-    //processing task
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        
+
+    // avoid watching task double runnning
+    [self.backgroundOperationQueue cancelAllOperations];
+
+    // processing task
+    NSBlockOperation *operation = [[NSBlockOperation alloc] init];
+    __weak NSBlockOperation *weakOperation = operation;
+    [operation addExecutionBlock:^{
         NSString *pastboardContents = [[UIPasteboard generalPasteboard] string];
-        
+
         //detect change of pasteboard in loop
         for (NSInteger i = 0; i < JRNPasteboardMonitorBackgroundTaskExpireDuration; i++) {
+            if (weakOperation.isCancelled) {
+                return;
+            }
             if ( ![pastboardContents isEqualToString:[[UIPasteboard generalPasteboard] string]] ) {
                 pastboardContents = [[UIPasteboard generalPasteboard] string];
-                
+
                 if ( self.changeHandler ) {
                     self.changeHandler([[UIPasteboard generalPasteboard] string]);
                 }
             }
-            
+
             //wait 1 second
             [NSThread sleepForTimeInterval:1];
         }
-        
+
         //notify expiration
         if ( self.expireHandler ) {
             self.expireHandler();
         }
-        
+
         [self stopBackgroundTask];
-    });
+    }];
+    [self.backgroundOperationQueue addOperation:operation];
 }
 
 - (void)stopBackgroundTask
