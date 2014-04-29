@@ -1,10 +1,10 @@
 PODS:
-  - JRNLocalNotificationCenter (0.0.1)
+  - JRNLocalNotificationCenter (0.0.3)
 
 DEPENDENCIES:
   - JRNLocalNotificationCenter
 
 SPEC CHECKSUMS:
-  JRNLocalNotificationCenter: f248a615dbfca9ab103db6d788837e0284ceec3d
+  JRNLocalNotificationCenter: 29d1ae39cf04128b36510866722ad12af8cd1ac9
 
-COCOAPODS: 0.22.3
+COCOAPODS: 0.32.1
