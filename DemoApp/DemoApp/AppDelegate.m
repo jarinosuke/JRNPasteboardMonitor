@@ -30,11 +30,7 @@
     [JRNPasteboardMonitor defaultMonitor].expireHandler = ^{
         [[JRNLocalNotificationCenter defaultCenter] postNotificationOnNowForKey:@"JRNPasteboardMonitor_Expire"
                                                                       alertBody:@"Monitoring was expired, please launch again."
-                                                                    alertAction:@"Open"
-                                                                      soundName:nil
-                                                                    launchImage:nil
-                                                                       userInfo:nil
-                                                                     badgeCount:0];
+                                                                       userInfo:nil];
     };
     
     
@@ -42,11 +38,7 @@
     [[JRNPasteboardMonitor defaultMonitor] startMonitoringWithChangeHandler:^(NSString *string) {
         [[JRNLocalNotificationCenter defaultCenter] postNotificationOnNowForKey:@"JRNPasteboardMonitor_Copy"
                                                                       alertBody:[NSString stringWithFormat:@"%@ copied.", string]
-                                                                    alertAction:@"Open"
-                                                                      soundName:nil
-                                                                    launchImage:nil
-                                                                       userInfo:@{@"copied_string": string}
-                                                                     badgeCount:0];
+                                                                       userInfo:@{@"copied_string": string}];
     }];
     return YES;
 }
