@@ -10,8 +10,8 @@
 
 static JRNPasteboardMonitor *defaultMonitor;
 
-NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 minutes
-
+NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDurationPriorIOS7 = 600; //10 minutes
+NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDurationLaterIOS7 = 180; // 3 minutes
 @interface JRNPasteboardMonitor()
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
 @property (nonatomic) NSOperationQueue *backgroundOperationQueue;
@@ -107,7 +107,8 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
         NSString *pastboardContents = [[UIPasteboard generalPasteboard] string];
 
         //detect change of pasteboard in loop
-        for (NSInteger i = 0; i < JRNPasteboardMonitorBackgroundTaskExpireDuration; i++) {
+        NSInteger expireDuration = [self expireDuration];
+        for (NSInteger i = 0; i < expireDuration; i++) {
             if (weakOperation.isCancelled) {
                 return;
             }
@@ -138,6 +139,17 @@ NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration = 600; //10 min
     //end the task
     [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTask];
     self.backgroundTask = UIBackgroundTaskInvalid;
+}
+
+- (NSInteger)expireDuration
+{
+    NSInteger expireDuration;
+    if (NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_6_1) {
+        expireDuration = JRNPasteboardMonitorBackgroundTaskExpireDurationPriorIOS7;
+    } else {
+        expireDuration = JRNPasteboardMonitorBackgroundTaskExpireDurationLaterIOS7;
+    }
+    return expireDuration;
 }
 
 #pragma mark -

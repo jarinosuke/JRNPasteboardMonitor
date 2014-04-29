@@ -10,7 +10,8 @@
 
 typedef void (^JRNPasteboardChangeHandler)(NSString *string);
 typedef void (^JRNPastebooardMonitoringExpireHandler)(void);
-extern NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDuration;
+extern NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDurationPriorIOS7;
+extern NSInteger const JRNPasteboardMonitorBackgroundTaskExpireDurationLaterIOS7;
 
 @interface JRNPasteboardMonitor : NSObject
 @property (nonatomic, copy) JRNPasteboardChangeHandler changeHandler;
